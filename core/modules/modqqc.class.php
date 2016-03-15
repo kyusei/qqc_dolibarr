@@ -46,7 +46,7 @@ class modqqc extends DolibarrModules
 
 		// Id for module (must be unique).
 		// Use here a free id (See in Home -> System information -> Dolibarr for list of used modules id).
-		$this->numero = ; // 104000 to 104999 for ATM CONSULTING
+		$this->numero = 209038 ; // 104000 to 104999 for ATM CONSULTING
 		// Key text used to identify module (for permissions, menus, etc...)
 		$this->rights_class = 'qqc';
 
@@ -72,8 +72,8 @@ class modqqc extends DolibarrModules
 		// for default path (eg: /qqc/core/xxxxx) (0=disable, 1=enable)
 		// for specific path of parts (eg: /qqc/core/modules/barcode)
 		// for specific css file (eg: /qqc/css/qqc.css.php)
-		//$this->module_parts = array(
-		//                        	'triggers' => 0,                                 	// Set this to 1 if module has its own trigger directory (core/triggers)
+		$this->module_parts = array(
+		                        	'triggers' => 1);                                	// Set this to 1 if module has its own trigger directory (core/triggers)
 		//							'login' => 0,                                    	// Set this to 1 if module has its own login method directory (core/login)
 		//							'substitutions' => 0,                            	// Set this to 1 if module has its own substitution function file (core/substitutions)
 		//							'menus' => 0,                                    	// Set this to 1 if module has its own menus handler directory (core/menus)
@@ -186,6 +186,19 @@ class modqqc extends DolibarrModules
 		$r=0;
 
 		// Add here entries to declare new menus
+         $this->menu[$r]=array(	'fk_menu'=>0,			                // Put 0 if this is a top menu
+									'type'=>'top',			                // This is a Top menu entry
+									'titre'=>'qqc',
+									'mainmenu'=>'qqc',
+									'leftmenu'=>'qqc',
+									'url'=>'././qqc.php',
+									'langs'=>'mylangfile@qqc',	        // Lang file to use (without .lang) by module. File must be in langs/code_CODE/ directory.
+									'position'=>100,
+									'enabled'=>'$conf->qqc->enabled',	// Define condition to show or hide menu entry. Use '$conf->qqc->enabled' if entry must be visible if module is enabled.
+									'perms'=>'1',			                // Use 'perms'=>'$user->rights->qqc->level1->level2' if you want your menu with a permission rules
+									'target'=>'',
+								'user'=>2);				                // 0=Menu for internal users, 1=external users, 2=both
+		 $r++;
 		//
 		// Example to declare a new Top Menu entry and its Left menu entry:
 		// $this->menu[$r]=array(	'fk_menu'=>0,			                // Put 0 if this is a top menu
