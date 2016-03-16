@@ -1,6 +1,7 @@
 <?php
 
 require 'config.php';
+dol_include_once('core/class/html.formprojet.class.php');
 
 
 // Security check
@@ -19,6 +20,8 @@ print load_fiche_titre($transAreaType,$linkback);
 
 
 $form = new Form($db);
+$formcore = new TFormCore;
+$formProjet = new FormProjets($db);
 ?>
     <div class="">
         <form method="post" name="formQQC">
@@ -54,18 +57,35 @@ $form = new Form($db);
                         
                     </td>
                 </tr>
-                <tr>
-                    <td>
-                        <label>Saisissez le contenu de votre QQC :</label>
+                <tr class="liste_titre">
+                    <td colspan="3">
+                        <label>Saisissez vos taches  :</label>
                     </td>
-                    <td colspan=2>
+
+                </tr>
+                <tr>
+                    <td colspan="3">
                         <?php 
-                        print $form->select_date();
+                        print $formProjet->selectTasks(-1, '', 'task1_id');
                         ?>
                     </td>
-                    <td>
-                        
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <?php 
+                        print $formProjet->selectTasks(-1, '', 'task2_id');
+                        ?>
                     </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <?php 
+                        print $formProjet->selectTasks(-1, '', 'task3_id');
+                        ?>
+                    </td>
+                </tr>
+
+                <tr>
                 </tr>
             </table>
         </form>
